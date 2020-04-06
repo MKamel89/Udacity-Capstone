@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:18.04
 
 ## Step 2:
 # Update Ubuntu and install nginx
