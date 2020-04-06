@@ -12,12 +12,11 @@ pipeline {
     //   }
     // }
     stage("Linting HTML") {
-        {
-          steps {
-            echo 'Linting HTML'
-            sh 'make lintHTML'
-          }
-        }
+      steps {
+        echo 'Linting HTML'
+        sh 'make lintHTML'
+      }
+    }
 
     stage("Linting Docker") {
       steps{
