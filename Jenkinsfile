@@ -29,10 +29,11 @@ pipeline {
     stage('Build Nginx Docker image') {
       steps{
         script {
-          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+          dockerImage = docker.build -t registry + ":$BUILD_NUMBER" -t registry +":latest"
         }
       }
     }
+
     stage('Publish Image on DockerHub') {
       steps{
         script {
@@ -42,7 +43,7 @@ pipeline {
         }
       }
     }
-    
+
     // stage('Remove Unused docker image') {
     //   steps{
     //     sh "docker rmi $registry:$BUILD_NUMBER"
