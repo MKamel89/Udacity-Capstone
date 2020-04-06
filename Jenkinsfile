@@ -13,6 +13,7 @@ pipeline {
     // }
     stage("Linting HTML") {
       steps {
+        sh "ls"
         echo 'Linting HTML'
         sh 'tidy *.html'
       }
@@ -21,7 +22,7 @@ pipeline {
     stage("Linting Docker") {
       steps{
         echo 'Linting Docker File'
-        sh 'make lintDocker'
+        sh 'hadolint Dockerfile'
       }
     }
 
