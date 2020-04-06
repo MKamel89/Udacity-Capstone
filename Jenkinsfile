@@ -13,7 +13,7 @@ pipeline {
     // }
     stage("Linting HTML") {
       steps {
-        echo 'Linting HTML'
+        echo 'Lintingg HTML'
         sh 'make lintHTML'
       }
     }
