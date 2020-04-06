@@ -12,13 +12,18 @@ pipeline {
     //   }
     // }
     stage("Linting HTML") {
-        echo 'Linting HTML'
-        sh 'make lintHTML'
+        {
+          steps {
+            echo 'Linting HTML'
+            sh 'make lintHTML'
+          }
         }
 
     stage("Linting Docker") {
-      echo 'Linting Docker File'
-      sh 'make lintDocker'
+      steps{
+        echo 'Linting Docker File'
+        sh 'make lintDocker'
+      }
     }
 
     stage('Build Nginx Docker image') {
