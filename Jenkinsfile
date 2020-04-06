@@ -22,7 +22,7 @@ pipeline {
     stage("Linting Docker") {
       steps{
         echo 'Linting Docker File'
-        sh 'hadolint --ignore DL3008 Dockerfile'
+        sh 'hadolint --ignore "DL3008,DL3015" Dockerfile'
       }
     }
 

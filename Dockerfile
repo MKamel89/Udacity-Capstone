@@ -2,7 +2,7 @@ FROM ubuntu:18.04
 
 ## Step 2:
 # Update Ubuntu and install nginx
-RUN apt-get update -y --no-install-recommends \
+RUN apt-get update -y \
     && apt-get install -y nginx \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
