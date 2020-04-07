@@ -41,10 +41,54 @@ pipeline {
       }
     }
 
-    // stage('Remove Unused docker image') {
-    //   steps{
-    //     sh "docker rmi $registry:$BUILD_NUMBER"
-    //   }
-    // }
-  }
+    stage('set current kubectl context') {
+      steps{
+        withAWS(region:'us-west-2', credentials:'aws-cred') {
+          sh "kubectl config use-context arn:aws:eks:us-west-2:680025312548:cluster/captsone-cluster"
+        }
+      }
+    }
+
+    stage('Deploying Blue Container') {
+      steps{
+        withAWS(region:'us-west-2', credentials:'aws-cred') {
+          sh "kubectl apply -f ./blue-controller.json"
+        }
+      }
+    }
+
+    stage('Deploying Green Container') {
+      steps{
+        withAWS(region:'us-west-2', credentials:'aws-cred') {
+          sh "kubectl apply -f ./green-controller.json"
+        }
+      }
+    }
+
+    stage('Redirect to Blue') {
+      steps{
+        withAWS(region:'us-west-2', credentials:'aws-cred') {
+          sh "kubectl apply -f ./blue-service.json"
+        }
+      }
+    }
+
+    stage('Confirmation needed') {
+      steps{
+        input '''
+          Traffic is currently routed to Blue. 
+          You can use "kubectl get services" command to get the URL
+          
+          Proceed with green redirection?
+        '''
+      }
+    }
+
+    stage('Redirect to Green') {
+      steps{
+        withAWS(region:'us-west-2', credentials:'aws-cred') {
+          sh "kubectl apply -f ./green-service.json"
+        }
+      }
+    }
 }
