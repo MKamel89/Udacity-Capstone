@@ -75,12 +75,7 @@ pipeline {
 
     stage('Confirmation needed') {
       steps{
-        input '''
-          Traffic is currently routed to Blue. 
-          You can use "kubectl get services" command to get the URL
-
-          Proceed with green redirection?
-        '''
+        input "Proceed with green redirection?"
       }
     }
 
@@ -91,6 +86,6 @@ pipeline {
         }
       }
     }
-    
+
   }
 }
