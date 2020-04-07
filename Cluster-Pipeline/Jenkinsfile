@@ -1,1 +1,13 @@
-// test
+pipeline {
+  agent any
+  stages {
+    
+    stage("Linting HTML") {
+      steps {
+        sh "ls"
+        echo 'Linting HTML'
+      }
+    }
+
+  }
+}
