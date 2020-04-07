@@ -78,7 +78,7 @@ pipeline {
         input '''
           Traffic is currently routed to Blue. 
           You can use "kubectl get services" command to get the URL
-          
+
           Proceed with green redirection?
         '''
       }
@@ -91,4 +91,6 @@ pipeline {
         }
       }
     }
+    
+  }
 }
